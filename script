@@ -1,0 +1,21 @@
+set -xe
+
+source /etc/profile.d/pspsdk.sh
+
+rm -rf kern_build
+rm -rf user_build
+
+mkdir kern_build
+cd kern_build
+cmake ../kern
+make
+cd ..
+
+mkdir user_build
+cd user_build
+cmake ../user
+make
+cd ..
+
+mv user_build/ark_standalone_highmem_user.suprx ./
+mv kern_build/ark_standalone_highmem_kern.skprx ./
